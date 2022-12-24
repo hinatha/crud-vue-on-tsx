@@ -1,25 +1,33 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import App from '@/views/App.vue'
+import AddTodo from '@/views/AddTodo.vue'
+import EditTodo from '@/views/EditTodo.vue'
 
 const routes: Array<RouteRecordRaw> = [
+  // Route of top page
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'App',
+    component: App,
   },
+  // Route of AddTodo page
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/new',
+    name: 'AddTodo',
+    component: AddTodo,
+  },
+  // Route of EditTodo page
+  {
+    // We can set parameter to do like ":id"
+    path: '/edit/:id',
+    name: 'EditTodo',
+    component: EditTodo,
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router
