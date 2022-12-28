@@ -1,8 +1,3 @@
-<template>
-  <router-view></router-view>
-</template>
-
-<script lang="ts">
 import { defineComponent, provide } from 'vue'
 import TodoStore, { todoKey } from '@/store/todo'
 
@@ -12,6 +7,11 @@ export default defineComponent({
   setup () {
     // provide(store's key, store's value)
     provide(todoKey, TodoStore)
+
+    return () => (
+      <div>
+        <router-view></router-view>
+      </div>
+    )
   },
 })
-</script>
