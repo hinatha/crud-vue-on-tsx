@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import App from '@/views/App.vue'
-import AddTodo from '@/views/AddTodo.vue'
+import AddTodo from '@/views/AddTodo'
 import EditTodo from '@/views/EditTodo.vue'
 
 const routes: Array<RouteRecordRaw> = [

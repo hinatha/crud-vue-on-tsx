@@ -1,36 +1,3 @@
-<template>
-  <h2>TODOを作成する</h2>
-  <!-- @submit.prevent is for validation -->
-  <form @submit.prevent="onSubmit">
-    <div>
-      <label for="title">タイトル</label>
-      <!-- Input todo title -->
-      <!-- "data.title" in v-model is synchronized with the form input value -->
-      <input type="text" id="title" v-model="data.title" />
-    </div>
-    <div>
-      <label for="description">説明</label>
-      <!-- Input todo description -->
-      <!-- "data.description" in v-model is synchronized with the form input value -->
-      <textarea id="description" v-model="data.description" />
-    </div>
-    <div>
-      <label for="status">ステータス</label>
-      <!-- Input todo status -->
-      <!-- "data.status" in v-model is synchronized with the form input value -->
-      <select id="status" v-model="data.status">
-        <option value="waiting">waiting</option>
-        <option value="working">working</option>
-        <option value="completed">completed</option>
-        <option value="pending">pending</option>
-      </select>
-    </div>
-    <!-- Call onSubmit function -->
-    <button @click="onSubmit">作成する</button>
-  </form>
-</template>
-
-<script lang="ts">
 import { defineComponent, inject, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { Params } from '@/store/todo/types'
@@ -82,10 +49,28 @@ export default defineComponent({
       router.push('/')
     }
 
-    return {
-      data,
-      onSubmit,
-    }
+    return () => (
+      <div>
+        <h2>TODOを作成する</h2>
+        <div>
+          <label for="title">タイトル</label>
+          <input type="text" id="title" v-model={data.title} />
+        </div>
+        <div>
+          <label for="description">説明</label>
+          <textarea id="description" v-model={data.description} />
+        </div>
+        <div>
+          <label for="status">ステータス</label>
+          <select id="status" v-model={data.status}>
+            <option value="waiting">waiting</option>
+            <option value="working">working</option>
+            <option value="completed">completed</option>
+            <option value="pending">pending</option>
+          </select>
+        </div>
+        <button onClick={() => onSubmit()}>作成する</button>
+      </div>
+    )
   },
 })
-</script>
