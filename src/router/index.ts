@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import App from '@/views/App.vue'
 import AddTodo from '@/views/AddTodo'
-import EditTodo from '@/views/EditTodo.vue'
+import EditTodo from '@/views/EditTodo'
 
 const routes: Array<RouteRecordRaw> = [
   // Route of top page
