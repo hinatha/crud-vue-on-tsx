@@ -1,22 +1,7 @@
-<template>
-  <ul>
-    <!-- :todo pass data to child component -->
-    <!-- emit need to change camel case to kebab case (clickTitle -> click-title) -->
-    <todo-item
-      v-for="todo in todoStore.state.todos"
-      :key="todo.id"
-      :todo="todo"
-      @click-title="clickTitle"
-      @click-delete="clickDelete"
-    >
-    </todo-item>
-  </ul>
-</template>
-
-<script lang="ts">
 import { defineComponent, inject } from 'vue'
+import { Todo } from '@/store/todo/types'
 import { useRouter } from 'vue-router'
-import TodoItem from '@/components/TodoItem.vue'
+import TodoItem from '@/components/TodoItem'
 import { todoKey } from '@/store/todo'
 
 export default defineComponent({
@@ -39,13 +24,13 @@ export default defineComponent({
 
     // Parent component can receive props.todo.item as the event argument
     // Set todo id as argument of this method
-    const clickDelete = (id: number) => {
+    const onClickDelete = (id: number) => {
       todoStore.deleteTodo(id)
     }
 
     // Parent component can receive props.todo.item as the event argument
     // Set todo id as argument of this method
-    const clickTitle = (id: number) => {
+    const onClickTitle = (id: number) => {
       // Move to edit page
       router.push(`/edit/${id}`)
     }
@@ -54,11 +39,14 @@ export default defineComponent({
     // In case of await, we need to call after inject and useRouter
     await todoStore.fetchTodos()
 
-    return {
-      todoStore,
-      clickDelete,
-      clickTitle,
-    }
+    return () => (
+      <div>
+        <ul>
+          {todoStore.state.todos?.map((todo: Todo) => (
+            <TodoItem todo={todo} key={todo.id} onClickTitle={onClickTitle} onClickDelete={onClickDelete} />
+          ))}
+        </ul>
+      </div>
+    )
   },
 })
-</script>
