@@ -1,7 +1,6 @@
 import '@/css/TodoItem.css'
 import { Todo } from '@/store/todo/types'
 import { defineComponent, PropType } from 'vue'
-import { useFormatDate } from '@/composables/use-formate-date'
 
 export default defineComponent({
 
@@ -37,7 +36,7 @@ export default defineComponent({
     }
 
     // Format date when update props.todo
-    const formatDate = useFormatDate(props.todo.createdAt)
+    const formatDate = `${props.todo.createdAt.getFullYear()}/${props.todo.createdAt.getMonth() + 1}/${props.todo.createdAt.getDate()}`
 
     return () => (
       <div class="card">
@@ -45,8 +44,8 @@ export default defineComponent({
           <span class="title" onClick={() => clickTitle(props.todo.id)}>{ props.todo.title }</span>
           <span class={'status' + ' ' + `${props.todo.status}`}>{ props.todo.status }</span>
         </div>
-        <div class="body">作成日：{ formatDate }</div>
         <hr />
+        <div class="body">作成日：{ formatDate }</div>
         <div class="action">
           <button onClick={() => clickDelete(props.todo.id)}>削除</button>
         </div>

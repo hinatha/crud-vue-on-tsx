@@ -15,13 +15,6 @@ const fetchTodos = async () => {
   state.todos = await TodoRepository.getAll()
 }
 
-const fetchTodo = async (id: number) => {
-  // get(id) is Promise
-  const todo = await TodoRepository.get(id)
-  // Push this todo to state
-  state.todos.push(todo)
-}
-
 // Get Todo by id
 const getTodo = (id: number) => {
   const todo = state.todos.find((todo) => todo.id === id)
@@ -66,7 +59,6 @@ const deleteTodo = (id: number) => {
 const todoStore: TodoStore = {
   state: readonly(state),
   fetchTodos,
-  fetchTodo,
   getTodo,
   addTodo,
   updateTodo,

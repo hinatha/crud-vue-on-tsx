@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue'
+import { defineComponent, onMounted, inject } from 'vue'
 import { Todo } from '@/store/todo/types'
 import { useRouter } from 'vue-router'
 import TodoItem from '@/components/TodoItem'
@@ -8,7 +8,7 @@ export default defineComponent({
   components: {
     TodoItem,
   },
-  async setup () { // Change to async
+  setup () { // Change to async
     // Inject todoStore
     const todoStore = inject(todoKey)
     // todoStore: Store | undefined
@@ -37,7 +37,9 @@ export default defineComponent({
 
     // Call fetchTodos() with await
     // In case of await, we need to call after inject and useRouter
-    await todoStore.fetchTodos()
+    onMounted(async () => {
+      await todoStore.fetchTodos()
+    })
 
     return () => (
       <div>

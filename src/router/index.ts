@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import App from '@/views/App.vue'
+import App from '@/views/App'
 import AddTodo from '@/views/AddTodo'
 import EditTodo from '@/views/EditTodo'
 
