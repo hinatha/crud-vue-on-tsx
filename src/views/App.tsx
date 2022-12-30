@@ -1,8 +1,11 @@
-import { defineComponent, defineAsyncComponent } from 'vue'
+import { defineComponent } from 'vue'
+import AsyncTodos from '@/components/AsyncTodos'
 
 export default defineComponent({
+  components: {
+    AsyncTodos,
+  },
   setup () {
-    const AsyncTodos = defineAsyncComponent(() => import('@/components/AsyncTodos'))
     return () => (
       <div>
         <h2>TODO一覧</h2>

@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, inject } from 'vue'
+import { defineComponent, onMounted, inject, reactive } from 'vue'
 import { Todo } from '@/store/todo/types'
 import { useRouter } from 'vue-router'
 import TodoItem from '@/components/TodoItem'
@@ -35,19 +35,31 @@ export default defineComponent({
       router.push(`/edit/${id}`)
     }
 
+    // Define loading state
+    const loading = reactive({
+      show: false,
+    })
+
     // Call fetchTodos() with await
     // In case of await, we need to call after inject and useRouter
     onMounted(async () => {
+      // Turn on loading
+      loading.show = true
       await todoStore.fetchTodos()
+      // Turn off loading
+      loading.show = false
     })
 
     return () => (
       <div>
-        <ul>
-          {todoStore.state.todos?.map((todo: Todo) => (
-            <TodoItem todo={todo} key={todo.id} onClickTitle={onClickTitle} onClickDelete={onClickDelete} />
-          ))}
-        </ul>
+        {loading.show
+          ? (<div>Loading ...</div>)
+          : (<ul>
+              {todoStore.state.todos?.map((todo: Todo) => (
+                <TodoItem todo={todo} key={todo.id} onClickTitle={onClickTitle} onClickDelete={onClickDelete} />
+              ))}
+            </ul>)
+        }
       </div>
     )
   },

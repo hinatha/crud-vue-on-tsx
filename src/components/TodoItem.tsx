@@ -3,7 +3,6 @@ import { Todo } from '@/store/todo/types'
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-
   // props: parent component -> child component
   // Data from parent component is readonly
   // Parent component(todo.vue): <todo-item :todo="todo" />
