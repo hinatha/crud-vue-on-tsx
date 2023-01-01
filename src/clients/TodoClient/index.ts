@@ -9,8 +9,8 @@ export class TodoClient implements TodoClientInterface {
       // Get localStrage key list(todo.id list)
       Object.keys(localStorage)
       // Change string to number
-        .filter((key: any) => !isNaN(Number(key)))
-        .map((key: any) => {
+        .filter((key: string) => !isNaN(Number(key)))
+        .map((key: string) => {
           // Change value(string) to todo(json)
           const todo = JSON.parse(localStorage.getItem(key) as string) as Todo
           // Change type of todo.createdAt from string to Date
