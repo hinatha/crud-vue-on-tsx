@@ -20,12 +20,6 @@ export default defineComponent({
     const router = useRouter()
 
     // Set form data as reactive
-    // If React, like below
-    // const [data, setData] = useState<Params>({
-    //   title: '',
-    //   description: '',
-    //   status: 'waiting',
-    // })
     const data = reactive<Params>({
       title: '',
       description: '',

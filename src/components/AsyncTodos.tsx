@@ -8,7 +8,7 @@ export default defineComponent({
   components: {
     TodoItem,
   },
-  setup () { // Change to async
+  setup () {
     // Inject todoStore
     const todoStore = inject(todoKey)
     // todoStore: Store | undefined
@@ -40,11 +40,12 @@ export default defineComponent({
       show: false,
     })
 
-    // Call fetchTodos() with await
-    // In case of await, we need to call after inject and useRouter
+    // Wrapper await method by onMounted
     onMounted(async () => {
       // Turn on loading
       loading.show = true
+      // Call fetchTodos() with await
+      // In case of await, we need to call after inject and useRouter
       await todoStore.fetchTodos()
       // Turn off loading
       loading.show = false

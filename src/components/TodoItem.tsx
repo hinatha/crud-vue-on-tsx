@@ -5,36 +5,39 @@ import { defineComponent, PropType } from 'vue'
 export default defineComponent({
   // props: parent component -> child component
   // Data from parent component is readonly
-  // Parent component(todo.vue): <todo-item :todo="todo" />
   props: {
     todo: {
-      // Set props' type as Todo
+      // Set Object props' type as Todo
       type: Object as PropType<Todo>,
       // Warn when don't pass data as props
       required: true,
     },
     onClickTitle: {
+      // Set Function props' type
       type: Function as PropType<(id: number) => void>,
+      // Warn when don't pass data as props
       required: true,
     },
     onClickDelete: {
+      // Set Function props' type
       type: Function as PropType<(id: number) => void>,
+      // Warn when don't pass data as props
       required: true,
     },
   },
 
   setup (props) {
     const clickDelete = (id: number) => {
-      // Set emit as clickDelete
+      // Execute onClickDelete method in props
       props.onClickDelete(id)
     }
 
     const clickTitle = (id: number) => {
-      // Set emit as clickTitle
+      // Execute onClickTitle method in props
       props.onClickTitle(id)
     }
 
-    // Format date when update props.todo
+    // Change formatDate
     const formatDate = `${props.todo.createdAt.getFullYear()}/${props.todo.createdAt.getMonth() + 1}/${props.todo.createdAt.getDate()}`
 
     return () => (

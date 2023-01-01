@@ -29,7 +29,7 @@ export type Params = Pick<Todo, 'title' | 'description' | 'status'>
 export interface TodoStore {
   // DeepReadonly is interface, when readonly method (in composition api) used
   state: DeepReadonly<TodoState>
-  fetchTodos: () => void // Get all Todos
+  fetchTodos: () => void
   getTodo: (id: number) => Todo
   addTodo: (todo: Params) => void
   updateTodo: (id: number, todo: Todo) => void
